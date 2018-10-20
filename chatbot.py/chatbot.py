@@ -21,14 +21,40 @@ GREETING_OUTPUTS = ("Srinath","Akula")
 GREETING_INPUTS = ("And your gender?")
 GREETING_OUTPUTS = ("Male","Female")
 
-GREETING_INPUTS = ("May I know your age?")
-GREETING_OUTPUTS = (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
-
-
-
-
 def greeting(sentence):
  
     for word in sentence.split():
         if word.lower() in GREETING_INPUTS:
             return random.choice(GREETING_RESPONSES)
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+def response(user_response):
+    bot_response=''
+    TfidfVec = TfidfVectorizer(tokenizer=LemNormalize, stop_words='english')
+    tfidf = TfidfVec.fit_transform(sent_tokens)
+    vals = cosine_similarity(tfidf[-1], tfidf)
+    idx=vals.argsort()[0][-2]
+    flat = vals.flatten()
+    flat.sort()
+    req_tfidf = flat[-2]
+    if(req_tfidf==0):
+        bot_response=bot_response+"I couldn't quite get how that response can be your age :/ Please enter your valid age."
+        return bot_response
+    else:
+        bot_response = bot_response+sent_tokens[idx]
+        return bot_response
+ flag=True
+print("BOT: My name is Elth. I am your personal assistant")
+
+while(flag==True):
+    user_response = input()
+ 
+    if(user_response.isdigit()):
+       print("Congratulations! Registration Successful.")
+    else
+    flag==False
+        
+        
+
+
